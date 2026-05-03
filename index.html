@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Order Online - Dimsum Sewu</title>
+    
+    <!-- Sesuaikan path icon dengan logo Dimsum Sewu Anda -->
+    <link rel="icon" type="image/png" href="logo.png">
+    
+    <!-- Meta tag untuk optimalisasi PWA/Mobile -->
+    <meta name="theme-color" content="#f8fafc">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Dimsum Sewu">
+    <link rel="apple-touch-icon" href="logo.png">
+
+    <style>
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
+            overflow: hidden; 
+            background-color: #f8fafc; /* Selaras dengan background Web Order Dimsum Sewu */
+            font-family: 'Segoe UI', sans-serif;
+        }
+        iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+            display: block; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Iframe dengan atribut sandbox lengkap agar window.open (WhatsApp) tidak diblokir -->
+    <iframe id="gas-frame" 
+            src="https://script.google.com/macros/s/AKfycbwaaax1hYuy8vxXOoiR50f9Mh7vIPPSk6zFxeMVGKhYwlwoqNTs0pFGFyuHS3QMzaM3JQ/exec?mode=order" 
+            allowfullscreen 
+            allow="clipboard-read; clipboard-write; geolocation"
+            sandbox="allow-scripts allow-top-navigation allow-top-navigation-by-user-activation allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-downloads allow-modals">
+    </iframe>
+
+    <script>
+        window.onload = function() {
+            var urlParams = window.location.search;
+            var iframe = document.getElementById('gas-frame');
+            
+            // Jika ada parameter (misal: ?ref=0812345), akan diubah menjadi &ref=0812345
+            // Hal ini karena base URL di src iframe sudah menggunakan tanda "?" (?mode=order)
+            if (urlParams) {
+                iframe.src = iframe.src + urlParams.replace('?', '&');
+            }
+        };
+    </script>
+</body>
+</html>
